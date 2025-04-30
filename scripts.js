@@ -27,10 +27,14 @@ document.addEventListener('DOMContentLoaded', () => {
 
     // Product Data
     const products = [
-        { id: 1, name: 'Fresh Tomatoes', price: 2.99, category: 'vegetables', image: 'https://via.placeholder.com/300.png?text=Tomatoes' },
-        { id: 2, name: 'Organic Apples', price: 3.49, category: 'fruits', image: 'https://via.placeholder.com/300.png?text=Apples' },
-        { id: 3, name: 'Green Broccoli', price: 1.99, category: 'vegetables', image: 'https://via.placeholder.com/300.png?text=Broccoli' },
-        { id: 4, name: 'Bananas', price: 1.29, category: 'fruits', image: 'https://via.placeholder.com/300.png?text=Bananas' },
+        { id: 1, name: 'Fresh Tomatoes', price: 2.99, category: 'vegetables', image: 'img/tomatoes.jpeg' },
+        { id: 2, name: 'Organic Apples', price: 3.49, category: 'fruits', image: 'img/apples.jpeg' },
+        { id: 3, name: 'Green Broccoli', price: 1.99, category: 'vegetables', image: 'img/broccoli.jpeg' },
+        { id: 4, name: 'Bananas', price: 1.29, category: 'fruits', image: 'img/banana.jpeg' },
+        { id: 5, name: 'Carrots', price: 0.99, category: 'vegetables', image: 'img/carrot.png' },
+        { id: 6, name: 'Strawberries', price: 4.99, category: 'fruits', image: 'img/strawberry.jpeg' },
+        { id: 7, name: 'Potatoes', price: 1.49, category: 'vegetables', image: 'img/potatoes.jpeg' },
+        { id: 8, name: 'Grapes', price: 2.99, category: 'fruits', image: 'img/grapes.jpeg' },
     ];
 
     // Display Featured Products on Index Page
