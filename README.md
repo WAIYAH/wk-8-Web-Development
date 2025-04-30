@@ -39,9 +39,7 @@ Bootstrap Icons: For icons in the cart and navigation.
 
 ## Setup and Installation
 
-Clone the Repository:git clone https://github.com/your-username/your-repo-name.git
-cd your-repo-name
-
+Clone the Repository:git clone https://github.com/WAIYAH/wk-8-Web-Development
 
 Open Locally:
 Open index.html in a web browser to view the site locally.
@@ -52,7 +50,7 @@ Alternatively, use a local server (e.g., with VS Code's Live Server extension).
 ## Deployment
 The website is deployed on GitHub Pages:
 
-Live URL: https://your-username.github.io/your-repo-name/
+Live URL: https://wk-8-web-development.vercel.app/
 To deploy:
 Push all files to your GitHub repository.
 Go to Settings > Pages in your GitHub repository.
