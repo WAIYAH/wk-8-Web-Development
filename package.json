@@ -1,0 +1,27 @@
+{
+  "name": "fresh-harvest-market",
+  "version": "1.0.0",
+  "description": "Fresh Harvest Market - Premium farm-to-table e-commerce experience.",
+  "type": "module",
+  "scripts": {
+    "dev": "vite",
+    "build": "vite build",
+    "preview": "vite preview"
+  },
+  "repository": {
+    "type": "git",
+    "url": "git+https://github.com/WAIYAH/wk-8-Web-Development.git"
+  },
+  "keywords": ["ecommerce", "organic", "fresh-produce", "farm-to-table"],
+  "author": "Lucky Nakola",
+  "license": "MIT",
+  "bugs": {
+    "url": "https://github.com/WAIYAH/wk-8-Web-Development/issues"
+  },
+  "homepage": "https://github.com/WAIYAH/wk-8-Web-Development#readme",
+  "devDependencies": {
+    "@tailwindcss/vite": "^4.1.18",
+    "tailwindcss": "^4.1.18",
+    "vite": "^7.3.1"
+  }
+}

@@ -1,0 +1,7 @@
+{
+  "categories": [
+    { "id": "all", "name": "All Products", "icon": "🛒", "description": "Browse our complete selection" },
+    { "id": "fruits", "name": "Fruits", "icon": "🍎", "description": "Fresh, seasonal fruits from local orchards" },
+    { "id": "vegetables", "name": "Vegetables", "icon": "🥦", "description": "Farm-fresh vegetables, picked at peak freshness" }
+  ]
+}
