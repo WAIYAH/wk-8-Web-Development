@@ -19,7 +19,9 @@ export function formatRating(rating) {
 
 export function formatDate(isoString) {
   return new Date(isoString).toLocaleDateString('en-US', {
-    month: 'short', day: 'numeric', year: 'numeric'
+    month: 'short',
+    day: 'numeric',
+    year: 'numeric',
   });
 }
 
@@ -36,5 +38,8 @@ export function debounce(fn, delay = 300) {
 }
 
 export function slugify(str) {
-  return str.toLowerCase().replace(/[^a-z0-9]+/g, '-').replace(/(^-|-$)/g, '');
+  return str
+    .toLowerCase()
+    .replace(/[^a-z0-9]+/g, '-')
+    .replace(/(^-|-$)/g, '');
 }

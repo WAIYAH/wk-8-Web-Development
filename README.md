@@ -16,14 +16,14 @@ A premium organic produce e-commerce experience built with Vanilla ES6 Modules, 
 
 ## 📋 Pages
 
-| Page | Description |
-|------|-------------|
-| **Home** | Parallax hero, featured products, personalized recommendations, seasonal picks, newsletter |
-| **Shop** | Full catalog with category filters, search, sort, organic/seasonal toggles |
-| **Product** | Dynamic detail view with nutrition info, quantity selector, related products |
-| **Cart** | Full cart management, discount codes, volume discounts, order summary |
-| **About** | Our Story, mission, team members |
-| **Contact** | Validated contact form, FAQ accordion, store info |
+| Page        | Description                                                                                |
+| ----------- | ------------------------------------------------------------------------------------------ |
+| **Home**    | Parallax hero, featured products, personalized recommendations, seasonal picks, newsletter |
+| **Shop**    | Full catalog with category filters, search, sort, organic/seasonal toggles                 |
+| **Product** | Dynamic detail view with nutrition info, quantity selector, related products               |
+| **Cart**    | Full cart management, discount codes, volume discounts, order summary                      |
+| **About**   | Our Story, mission, team members                                                           |
+| **Contact** | Validated contact form, FAQ accordion, store info                                          |
 
 ## 📦 Tech Stack
 

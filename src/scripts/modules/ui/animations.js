@@ -11,7 +11,7 @@ const Animations = {
   init() {
     if (prefersReducedMotion.matches) {
       // Instantly show all elements
-      document.querySelectorAll('.animate-on-scroll').forEach(el => {
+      document.querySelectorAll('.animate-on-scroll').forEach((el) => {
         el.classList.add('animate-in');
       });
       return;
@@ -19,7 +19,7 @@ const Animations = {
 
     this._observer = new IntersectionObserver(
       (entries) => {
-        entries.forEach(entry => {
+        entries.forEach((entry) => {
           if (entry.isIntersecting) {
             entry.target.classList.add('animate-in');
             this._observer.unobserve(entry.target);
@@ -35,7 +35,7 @@ const Animations = {
   },
 
   observe() {
-    document.querySelectorAll('.animate-on-scroll, .stagger-children').forEach(el => {
+    document.querySelectorAll('.animate-on-scroll, .stagger-children').forEach((el) => {
       this._observer?.observe(el);
     });
   },
@@ -50,18 +50,22 @@ const Animations = {
     if (!heroBg || prefersReducedMotion.matches) return;
 
     let ticking = false;
-    window.addEventListener('scroll', () => {
-      if (!ticking) {
-        requestAnimationFrame(() => {
-          const scroll = window.scrollY;
-          if (scroll < window.innerHeight) {
-            heroBg.style.transform = `translateY(${scroll * 0.3}px)`;
-          }
-          ticking = false;
-        });
-        ticking = true;
-      }
-    }, { passive: true });
+    window.addEventListener(
+      'scroll',
+      () => {
+        if (!ticking) {
+          requestAnimationFrame(() => {
+            const scroll = window.scrollY;
+            if (scroll < window.innerHeight) {
+              heroBg.style.transform = `translateY(${scroll * 0.3}px)`;
+            }
+            ticking = false;
+          });
+          ticking = true;
+        }
+      },
+      { passive: true }
+    );
   },
 
   initCounters() {
@@ -70,7 +74,7 @@ const Animations = {
 
     const counterObserver = new IntersectionObserver(
       (entries) => {
-        entries.forEach(entry => {
+        entries.forEach((entry) => {
           if (entry.isIntersecting) {
             this.animateCounter(entry.target);
             counterObserver.unobserve(entry.target);
@@ -80,7 +84,7 @@ const Animations = {
       { threshold: 0.5 }
     );
 
-    counters.forEach(el => counterObserver.observe(el));
+    counters.forEach((el) => counterObserver.observe(el));
   },
 
   animateCounter(el) {
@@ -111,12 +115,12 @@ const Animations = {
     const rect = btn.getBoundingClientRect();
     const size = Math.max(rect.width, rect.height);
     ripple.style.width = ripple.style.height = size + 'px';
-    ripple.style.left = (e.clientX - rect.left - size / 2) + 'px';
-    ripple.style.top = (e.clientY - rect.top - size / 2) + 'px';
+    ripple.style.left = e.clientX - rect.left - size / 2 + 'px';
+    ripple.style.top = e.clientY - rect.top - size / 2 + 'px';
     ripple.className = 'ripple';
     btn.appendChild(ripple);
     ripple.addEventListener('animationend', () => ripple.remove());
-  }
+  },
 };
 
 export default Animations;

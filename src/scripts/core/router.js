@@ -24,7 +24,7 @@ const Router = {
 
   getPage() {
     return this.currentPage;
-  }
+  },
 };
 
 export default Router;

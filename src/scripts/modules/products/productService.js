@@ -14,77 +14,82 @@ const ProductService = {
   },
 
   getById(id) {
-    return this._products.find(p => p.id === Number(id));
+    return this._products.find((p) => p.id === Number(id));
   },
 
   getBySlug(slug) {
-    return this._products.find(p => p.slug === slug);
+    return this._products.find((p) => p.slug === slug);
   },
 
   getByCategory(category) {
     if (!category || category === 'all') return this.getAll();
-    return this._products.filter(p => p.category === category);
+    return this._products.filter((p) => p.category === category);
   },
 
   getFeatured(count = 4) {
-    return [...this._products]
-      .sort((a, b) => b.rating - a.rating)
-      .slice(0, count);
+    return [...this._products].sort((a, b) => b.rating - a.rating).slice(0, count);
   },
 
   getOnSale() {
-    return this._products.filter(p => p.originalPrice && p.originalPrice > p.price);
+    return this._products.filter((p) => p.originalPrice && p.originalPrice > p.price);
   },
 
   getSeasonal() {
-    return this._products.filter(p => p.seasonal);
+    return this._products.filter((p) => p.seasonal);
   },
 
   getOrganic() {
-    return this._products.filter(p => p.organic);
+    return this._products.filter((p) => p.organic);
   },
 
   search(query) {
     if (!query || query.trim().length === 0) return this.getAll();
     const q = query.toLowerCase().trim();
-    return this._products.filter(p =>
-      p.name.toLowerCase().includes(q) ||
-      p.category.toLowerCase().includes(q) ||
-      p.tags.some(t => t.toLowerCase().includes(q)) ||
-      p.description.toLowerCase().includes(q)
+    return this._products.filter(
+      (p) =>
+        p.name.toLowerCase().includes(q) ||
+        p.category.toLowerCase().includes(q) ||
+        p.tags.some((t) => t.toLowerCase().includes(q)) ||
+        p.description.toLowerCase().includes(q)
     );
   },
 
-  filter({ category = 'all', sort = 'default', search = '', priceRange = [0, 100], organic = false, seasonal = false }) {
+  filter({
+    category = 'all',
+    sort = 'default',
+    search = '',
+    priceRange = [0, 100],
+    organic = false,
+    seasonal = false,
+  }) {
     let results = this.getAll();
 
     // Category filter
     if (category && category !== 'all') {
-      results = results.filter(p => p.category === category);
+      results = results.filter((p) => p.category === category);
     }
 
     // Search filter
     if (search && search.trim()) {
       const q = search.toLowerCase().trim();
-      results = results.filter(p =>
-        p.name.toLowerCase().includes(q) ||
-        p.tags.some(t => t.toLowerCase().includes(q))
+      results = results.filter(
+        (p) => p.name.toLowerCase().includes(q) || p.tags.some((t) => t.toLowerCase().includes(q))
       );
     }
 
     // Price range filter
     if (priceRange) {
-      results = results.filter(p => p.price >= priceRange[0] && p.price <= priceRange[1]);
+      results = results.filter((p) => p.price >= priceRange[0] && p.price <= priceRange[1]);
     }
 
     // Organic filter
     if (organic) {
-      results = results.filter(p => p.organic);
+      results = results.filter((p) => p.organic);
     }
 
     // Seasonal filter
     if (seasonal) {
-      results = results.filter(p => p.seasonal);
+      results = results.filter((p) => p.seasonal);
     }
 
     // Sorting
@@ -114,7 +119,7 @@ const ProductService = {
   getDiscountPercentage(product) {
     if (!product.originalPrice || product.originalPrice <= product.price) return 0;
     return Math.round(((product.originalPrice - product.price) / product.originalPrice) * 100);
-  }
+  },
 };
 
 export default ProductService;

@@ -12,7 +12,12 @@
     "type": "git",
     "url": "git+https://github.com/WAIYAH/wk-8-Web-Development.git"
   },
-  "keywords": ["ecommerce", "organic", "fresh-produce", "farm-to-table"],
+  "keywords": [
+    "ecommerce",
+    "organic",
+    "fresh-produce",
+    "farm-to-table"
+  ],
   "author": "Lucky Nakola",
   "license": "MIT",
   "bugs": {

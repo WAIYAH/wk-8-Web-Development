@@ -20,7 +20,7 @@ const CartUI = {
   updateBadge() {
     const badges = document.querySelectorAll('.cart-count');
     const count = cartManager.getItemCount();
-    badges.forEach(badge => {
+    badges.forEach((badge) => {
       badge.textContent = count;
       if (count > 0) {
         badge.classList.remove('hidden');
@@ -48,7 +48,7 @@ const CartUI = {
   animateAddToCart(triggerEl) {
     // Bounce the cart badge
     const badges = document.querySelectorAll('.cart-count');
-    badges.forEach(badge => {
+    badges.forEach((badge) => {
       badge.classList.add('bounce');
       setTimeout(() => badge.classList.remove('bounce'), 500);
     });
@@ -73,7 +73,7 @@ const CartUI = {
             <h2 class="text-xl font-bold text-dark">Shopping Cart (${cartManager.getItemCount()} items)</h2>
             <button id="clearCartBtn" class="text-sm text-tomato-red hover:underline font-medium">Clear Cart</button>
           </div>
-          ${items.map(item => this.renderCartItem(item)).join('')}
+          ${items.map((item) => this.renderCartItem(item)).join('')}
         </div>
 
         <!-- Order Summary -->
@@ -129,21 +129,33 @@ const CartUI = {
             <span class="text-stone-gray">Subtotal</span>
             <span class="font-medium">${formatPrice(subtotal)}</span>
           </div>
-          ${productSavings > 0 ? `
+          ${
+            productSavings > 0
+              ? `
           <div class="flex justify-between text-sm text-harvest-green">
             <span>Product Savings</span>
             <span class="font-medium">-${formatPrice(productSavings)}</span>
-          </div>` : ''}
-          ${volumeDiscount > 0 ? `
+          </div>`
+              : ''
+          }
+          ${
+            volumeDiscount > 0
+              ? `
           <div class="flex justify-between text-sm text-harvest-green">
             <span>Volume Discount</span>
             <span class="font-medium">-${formatPrice(volumeDiscount)}</span>
-          </div>` : ''}
-          ${codeDiscount > 0 ? `
+          </div>`
+              : ''
+          }
+          ${
+            codeDiscount > 0
+              ? `
           <div class="flex justify-between text-sm text-harvest-green">
             <span>Coupon Discount</span>
             <span class="font-medium">-${formatPrice(codeDiscount)}</span>
-          </div>` : ''}
+          </div>`
+              : ''
+          }
           <div class="flex justify-between text-sm">
             <span class="text-stone-gray">Delivery</span>
             <span class="font-medium text-harvest-green">Free</span>
@@ -163,15 +175,23 @@ const CartUI = {
             <input type="text" id="discountInput" placeholder="Discount code" class="form-input !py-2.5 !text-sm flex-1" maxlength="20">
             <button id="applyDiscountBtn" class="btn-secondary-fhm !py-2.5 !px-4 !text-sm">Apply</button>
           </div>
-          ${codes.length > 0 ? `
+          ${
+            codes.length > 0
+              ? `
           <div class="mt-3 space-y-2">
-            ${codes.map(code => `
+            ${codes
+              .map(
+                (code) => `
               <div class="flex items-center justify-between bg-harvest-green/5 rounded-lg px-3 py-2 text-sm">
                 <span class="font-medium text-harvest-green">${code}</span>
                 <button class="remove-code-btn text-stone-gray hover:text-tomato-red text-xs" data-code="${code}">Remove</button>
               </div>
-            `).join('')}
-          </div>` : ''}
+            `
+              )
+              .join('')}
+          </div>`
+              : ''
+          }
         </div>
 
         <button class="btn-primary-fhm w-full !py-3.5 !text-base" id="checkoutBtn">
@@ -199,7 +219,7 @@ const CartUI = {
 
   bindCartPageEvents() {
     // Quantity buttons
-    document.querySelectorAll('.cart-qty-btn').forEach(btn => {
+    document.querySelectorAll('.cart-qty-btn').forEach((btn) => {
       btn.addEventListener('click', () => {
         const productId = Number(btn.dataset.productId);
         const item = cartManager.getItem(productId);
@@ -215,7 +235,7 @@ const CartUI = {
     });
 
     // Remove buttons
-    document.querySelectorAll('.cart-remove-btn').forEach(btn => {
+    document.querySelectorAll('.cart-remove-btn').forEach((btn) => {
       btn.addEventListener('click', () => {
         const productId = Number(btn.dataset.productId);
         cartManager.removeItem(productId);
@@ -249,7 +269,7 @@ const CartUI = {
     }
 
     // Remove discount codes
-    document.querySelectorAll('.remove-code-btn').forEach(btn => {
+    document.querySelectorAll('.remove-code-btn').forEach((btn) => {
       btn.addEventListener('click', () => {
         cartManager.removeDiscount(btn.dataset.code);
         this.renderCartPage();
@@ -263,7 +283,7 @@ const CartUI = {
         showToast('Checkout feature coming soon! 🎉', 'info');
       });
     }
-  }
+  },
 };
 
 export default CartUI;

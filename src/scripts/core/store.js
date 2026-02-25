@@ -20,15 +20,23 @@ class Store {
     this.#state[key] = value;
 
     if (this.#listeners.has(key)) {
-      this.#listeners.get(key).forEach(cb => {
-        try { cb(value, oldValue); } catch (e) { console.error(`Store listener error [${key}]:`, e); }
+      this.#listeners.get(key).forEach((cb) => {
+        try {
+          cb(value, oldValue);
+        } catch (e) {
+          console.error(`Store listener error [${key}]:`, e);
+        }
       });
     }
 
     // Wildcard listeners
     if (this.#listeners.has('*')) {
-      this.#listeners.get('*').forEach(cb => {
-        try { cb(key, value, oldValue); } catch (e) { console.error('Store wildcard listener error:', e); }
+      this.#listeners.get('*').forEach((cb) => {
+        try {
+          cb(key, value, oldValue);
+        } catch (e) {
+          console.error('Store wildcard listener error:', e);
+        }
       });
     }
   }
@@ -63,7 +71,7 @@ const store = new Store({
   products: [],
   filters: { category: 'all', sort: 'default', search: '', priceRange: [0, 100] },
   user: { viewHistory: [], searchHistory: [], categoryAffinity: {}, cartHistory: [] },
-  ui: { cartOpen: false, mobileMenuOpen: false, currentPage: '' }
+  ui: { cartOpen: false, mobileMenuOpen: false, currentPage: '' },
 });
 
 export default store;

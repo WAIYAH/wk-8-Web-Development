@@ -11,12 +11,12 @@
 
 ### Target Customer Personas
 
-| Persona | Description | Motivation | Price Sensitivity | Tech Comfort |
-|---------|-------------|------------|-------------------|--------------|
-| **Health-Conscious Families** | Parents 28–45 seeking nutritious meals for kids | Organic labels, seasonal variety, meal planning | Medium — will pay premium for organic | Moderate |
-| **Professional Chefs** | Restaurant owners, caterers, home cooks | Bulk ordering, rare produce, consistent quality | Low — prioritize quality | High |
-| **Budget Shoppers** | Students, young professionals | Weekly deals, volume discounts, staple items | High — deal-driven behavior | High |
-| **Organic Enthusiasts** | Wellness-focused individuals 25–55 | Certifications, farm sourcing, sustainability | Low — values-driven spending | Moderate–High |
+| Persona                       | Description                                     | Motivation                                      | Price Sensitivity                     | Tech Comfort  |
+| ----------------------------- | ----------------------------------------------- | ----------------------------------------------- | ------------------------------------- | ------------- |
+| **Health-Conscious Families** | Parents 28–45 seeking nutritious meals for kids | Organic labels, seasonal variety, meal planning | Medium — will pay premium for organic | Moderate      |
+| **Professional Chefs**        | Restaurant owners, caterers, home cooks         | Bulk ordering, rare produce, consistent quality | Low — prioritize quality              | High          |
+| **Budget Shoppers**           | Students, young professionals                   | Weekly deals, volume discounts, staple items    | High — deal-driven behavior           | High          |
+| **Organic Enthusiasts**       | Wellness-focused individuals 25–55              | Certifications, farm sourcing, sustainability   | Low — values-driven spending          | Moderate–High |
 
 ### User Journey Map
 
@@ -38,12 +38,12 @@ Discovery → Browse → Select → Purchase → Reorder
 
 ### Competitive Positioning
 
-| Competitor | Strength | FHM Differentiator |
-|-----------|----------|-------------------|
-| Instacart | Delivery logistics | Direct farm-to-table narrative, no middleman feel |
-| FreshDirect | Scale, variety | Local-first sourcing, community connection |
-| Local CSA | Authenticity | Modern UX, browsing convenience, personalization |
-| Whole Foods Online | Brand trust | Price transparency, dynamic discounts, no Amazon dependency |
+| Competitor         | Strength           | FHM Differentiator                                          |
+| ------------------ | ------------------ | ----------------------------------------------------------- |
+| Instacart          | Delivery logistics | Direct farm-to-table narrative, no middleman feel           |
+| FreshDirect        | Scale, variety     | Local-first sourcing, community connection                  |
+| Local CSA          | Authenticity       | Modern UX, browsing convenience, personalization            |
+| Whole Foods Online | Brand trust        | Price transparency, dynamic discounts, no Amazon dependency |
 
 ---
 
@@ -207,27 +207,30 @@ export function ProductCard(product, options = {}) {
 
 Every meaningful user interaction is captured client-side:
 
-| Event Type | Data Captured | Storage Key |
-|-----------|---------------|-------------|
-| Product View | productId, category, timestamp, duration | `fhm_user_profile.viewHistory` |
-| Product Click | productId, source, position | `fhm_user_profile.viewHistory` |
-| Cart Action | productId, action, quantity | `fhm_user_profile.cartHistory` |
-| Search Query | query, resultsCount | `fhm_user_profile.searchHistory` |
-| Category Browse | category, timeSpent | `fhm_user_profile.categoryAffinity` |
+| Event Type      | Data Captured                            | Storage Key                         |
+| --------------- | ---------------------------------------- | ----------------------------------- |
+| Product View    | productId, category, timestamp, duration | `fhm_user_profile.viewHistory`      |
+| Product Click   | productId, source, position              | `fhm_user_profile.viewHistory`      |
+| Cart Action     | productId, action, quantity              | `fhm_user_profile.cartHistory`      |
+| Search Query    | query, resultsCount                      | `fhm_user_profile.searchHistory`    |
+| Category Browse | category, timeSpent                      | `fhm_user_profile.categoryAffinity` |
 
 ### Recommendation Algorithm (3-Tier Progressive)
 
 **Level 1 — Frequency (Immediate):**
+
 - Most viewed products in last 7 days
 - Recently viewed carousel
 - Minimum: 3 product views to activate
 
 **Level 2 — Category Affinity (Moderate data):**
+
 - Weighted category preferences from view/cart history
 - Cross-category suggestions (vegetables buyer → herbs)
 - Minimum: 10 interactions
 
 **Level 3 — Behavioral Patterns (Rich data):**
+
 - Price sensitivity scoring (avg cart value vs clicks)
 - Frequently bought together (co-occurrence in carts)
 - Seasonal preference alignment
@@ -289,13 +292,13 @@ const DiscountRules = {
 
   // Dynamic behavioral discounts
   FIRST_PURCHASE: { type: 'percentage', value: 0.15, code: 'WELCOME15' },
-  VOLUME_3:      { type: 'percentage', value: 0.05, minQty: 3 },
-  VOLUME_5:      { type: 'percentage', value: 0.10, minQty: 5 },
-  VOLUME_10:     { type: 'percentage', value: 0.15, minQty: 10 },
-  REORDER:       { type: 'percentage', value: 0.20, code: 'REORDER20' },
+  VOLUME_3: { type: 'percentage', value: 0.05, minQty: 3 },
+  VOLUME_5: { type: 'percentage', value: 0.1, minQty: 5 },
+  VOLUME_10: { type: 'percentage', value: 0.15, minQty: 10 },
+  REORDER: { type: 'percentage', value: 0.2, code: 'REORDER20' },
 
   // Flash sales (time-based)
-  FLASH_SALE:    { type: 'percentage', value: 0.25, schedule: 'weekly' }
+  FLASH_SALE: { type: 'percentage', value: 0.25, schedule: 'weekly' },
 };
 ```
 
@@ -307,7 +310,7 @@ Base Price (per unit)
   → - Product Sale Discount (if applicable)
   → - Volume Discount (if threshold met)
   → = Item Subtotal
-  
+
 Cart Subtotal (sum of item subtotals)
   → - Coupon Code Discount
   → - First Purchase Discount
@@ -320,47 +323,52 @@ Cart Subtotal (sum of item subtotals)
 
 ### Performance Budget
 
-| Metric | Budget | Enforcement |
-|--------|--------|-------------|
-| Total animation JS | < 15KB gzipped | Bundle analysis |
-| Concurrent animations | ≤ 5 | Intersection Observer |
-| Frame rate | 60fps minimum | GPU-only properties |
-| Time to Interactive impact | < 100ms | Deferred loading |
+| Metric                     | Budget         | Enforcement           |
+| -------------------------- | -------------- | --------------------- |
+| Total animation JS         | < 15KB gzipped | Bundle analysis       |
+| Concurrent animations      | ≤ 5            | Intersection Observer |
+| Frame rate                 | 60fps minimum  | GPU-only properties   |
+| Time to Interactive impact | < 100ms        | Deferred loading      |
 
 ### Scroll-Triggered Animations (Intersection Observer)
 
 ```javascript
 // Single observer, multiple targets
-const observer = new IntersectionObserver((entries) => {
-  entries.forEach(entry => {
-    if (entry.isIntersecting) {
-      entry.target.classList.add('animate-in');
-      observer.unobserve(entry.target); // One-shot
-    }
-  });
-}, { threshold: 0.15, rootMargin: '0px 0px -50px 0px' });
+const observer = new IntersectionObserver(
+  (entries) => {
+    entries.forEach((entry) => {
+      if (entry.isIntersecting) {
+        entry.target.classList.add('animate-in');
+        observer.unobserve(entry.target); // One-shot
+      }
+    });
+  },
+  { threshold: 0.15, rootMargin: '0px 0px -50px 0px' }
+);
 ```
 
 **Animation Catalog:**
 
-| Element | Animation | Trigger | Duration |
-|---------|-----------|---------|----------|
-| Hero text | Fade in + slide up | Page load | 800ms |
-| Hero background | Parallax scroll | Scroll position | Continuous |
-| Product cards | Staggered fade-in + scale | Scroll into view | 400ms + 100ms stagger |
-| Product card hover | Elevation + shadow | Mouse enter | 300ms |
-| Add-to-cart button | Ripple + fly-to-cart | Click | 600ms |
-| Cart badge | Bounce + scale | Item added | 400ms |
-| Section headings | Slide in from left | Scroll into view | 600ms |
-| Value props | Fade + counter animation | Scroll into view | 800ms |
-| Page transitions | Fade in | Page load | 400ms |
-| Toast notifications | Slide in + auto-dismiss | Event trigger | 300ms in, 3s display |
+| Element             | Animation                 | Trigger          | Duration              |
+| ------------------- | ------------------------- | ---------------- | --------------------- |
+| Hero text           | Fade in + slide up        | Page load        | 800ms                 |
+| Hero background     | Parallax scroll           | Scroll position  | Continuous            |
+| Product cards       | Staggered fade-in + scale | Scroll into view | 400ms + 100ms stagger |
+| Product card hover  | Elevation + shadow        | Mouse enter      | 300ms                 |
+| Add-to-cart button  | Ripple + fly-to-cart      | Click            | 600ms                 |
+| Cart badge          | Bounce + scale            | Item added       | 400ms                 |
+| Section headings    | Slide in from left        | Scroll into view | 600ms                 |
+| Value props         | Fade + counter animation  | Scroll into view | 800ms                 |
+| Page transitions    | Fade in                   | Page load        | 400ms                 |
+| Toast notifications | Slide in + auto-dismiss   | Event trigger    | 300ms in, 3s display  |
 
 ### Reduced Motion Compliance
 
 ```css
 @media (prefers-reduced-motion: reduce) {
-  *, *::before, *::after {
+  *,
+  *::before,
+  *::after {
     animation-duration: 0.01ms !important;
     transition-duration: 0.01ms !important;
     scroll-behavior: auto !important;
@@ -375,6 +383,7 @@ All JavaScript animations check `window.matchMedia('(prefers-reduced-motion: red
 ## G. IMPLEMENTATION PHASES WITH QUALITY GATES
 
 ### Phase 1: Foundation & Architecture (Priority: CRITICAL)
+
 - [x] Architecture document ← **This document**
 - [ ] Project folder structure creation
 - [ ] Vite + Tailwind CSS configuration
@@ -387,6 +396,7 @@ All JavaScript animations check `window.matchMedia('(prefers-reduced-motion: red
 **Quality Gate:** `npm run dev` starts, Tailwind classes render, store pub/sub works.
 
 ### Phase 2: Product Catalog & Pages
+
 - [ ] All 6 HTML pages (index, shop, product, cart, about, contact)
 - [ ] Header/Footer shared components
 - [ ] ProductCard component
@@ -399,6 +409,7 @@ All JavaScript animations check `window.matchMedia('(prefers-reduced-motion: red
 **Quality Gate:** All pages render, filtering works without reload, responsive at all breakpoints.
 
 ### Phase 3: Shopping Experience
+
 - [ ] CartManager class implementation
 - [ ] Add/remove/update cart items
 - [ ] Cart page with full item management
@@ -410,6 +421,7 @@ All JavaScript animations check `window.matchMedia('(prefers-reduced-motion: red
 **Quality Gate:** Cart operations accurate, persists on refresh, discount math verified.
 
 ### Phase 4: Personalization Engine
+
 - [ ] Interaction tracker module
 - [ ] User profile localStorage schema
 - [ ] Frequency-based recommendation (Level 1)
@@ -421,6 +433,7 @@ All JavaScript animations check `window.matchMedia('(prefers-reduced-motion: red
 **Quality Gate:** Recommendations change based on browsing behavior, no PII stored.
 
 ### Phase 5: Animation & Polish
+
 - [ ] Intersection Observer animation system
 - [ ] Parallax hero section
 - [ ] Product card hover effects
@@ -433,6 +446,7 @@ All JavaScript animations check `window.matchMedia('(prefers-reduced-motion: red
 **Quality Gate:** 60fps animations, no layout shifts, prefers-reduced-motion honored.
 
 ### Phase 6: Optimization & Launch
+
 - [ ] Semantic HTML audit
 - [ ] JSON-LD structured data
 - [ ] Meta tags optimization
@@ -449,6 +463,7 @@ All JavaScript animations check `window.matchMedia('(prefers-reduced-motion: red
 ## DESIGN SYSTEM SUMMARY
 
 ### Colors
+
 ```
 Primary:   #2B5F3B (Harvest Green), #4A7C59 (Leaf Green), #86A788 (Sprout Green)
 Accent:    #E35F5F (Tomato Red), #F9A826 (Carrot Orange), #E58C8C (Berry Pink)
@@ -456,16 +471,19 @@ Neutral:   #FCFAF7 (Farm White), #8B7355 (Soil Brown), #6B7280 (Stone Gray)
 ```
 
 ### Typography
+
 - **Headings:** Playfair Display (serif, editorial)
 - **Body:** Inter (sans-serif, readable)
 - **Accent:** Caveat (handwritten, organic feel)
 - **Scale:** 1.25 (major third)
 
 ### Spacing
+
 - Base unit: 4px
 - Scale: 4, 8, 12, 16, 24, 32, 48, 64, 96, 128
 
 ### Breakpoints
+
 - Mobile: 320px–639px (base)
 - Tablet: 640px–1023px
 - Desktop: 1024px–1279px

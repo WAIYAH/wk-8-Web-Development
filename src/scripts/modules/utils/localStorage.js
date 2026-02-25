@@ -38,7 +38,7 @@ const Storage = {
 
   clear() {
     try {
-      Object.keys(localStorage).forEach(key => {
+      Object.keys(localStorage).forEach((key) => {
         if (key.startsWith(STORAGE_PREFIX)) {
           localStorage.removeItem(key);
         }
@@ -52,7 +52,7 @@ const Storage = {
 
   has(key) {
     return localStorage.getItem(STORAGE_PREFIX + key) !== null;
-  }
+  },
 };
 
 export default Storage;

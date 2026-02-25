@@ -81,13 +81,13 @@ class CartManager {
 
   getItemCount() {
     let count = 0;
-    this.#items.forEach(item => count += item.quantity);
+    this.#items.forEach((item) => (count += item.quantity));
     return count;
   }
 
   getSubtotal() {
     let subtotal = 0;
-    this.#items.forEach(item => {
+    this.#items.forEach((item) => {
       subtotal += item.product.price * item.quantity;
     });
     return Math.round(subtotal * 100) / 100;
@@ -95,7 +95,7 @@ class CartManager {
 
   getProductSavings() {
     let savings = 0;
-    this.#items.forEach(item => {
+    this.#items.forEach((item) => {
       if (item.product.originalPrice && item.product.originalPrice > item.product.price) {
         savings += (item.product.originalPrice - item.product.price) * item.quantity;
       }
@@ -105,9 +105,9 @@ class CartManager {
 
   getVolumeDiscount() {
     let discount = 0;
-    this.#items.forEach(item => {
+    this.#items.forEach((item) => {
       const rule = discountsData.volumeDiscounts
-        .filter(d => item.quantity >= d.minQty)
+        .filter((d) => item.quantity >= d.minQty)
         .sort((a, b) => b.minQty - a.minQty)[0];
 
       if (rule) {
@@ -121,8 +121,8 @@ class CartManager {
     let discount = 0;
     const subtotal = this.getSubtotal();
 
-    this.#appliedCodes.forEach(code => {
-      const rule = discountsData.discounts.find(d => d.code === code && d.active);
+    this.#appliedCodes.forEach((code) => {
+      const rule = discountsData.discounts.find((d) => d.code === code && d.active);
       if (!rule) return;
       if (rule.minOrder && subtotal < rule.minOrder) return;
 
@@ -149,7 +149,7 @@ class CartManager {
 
   applyDiscount(code) {
     const upper = code.toUpperCase().trim();
-    const rule = discountsData.discounts.find(d => d.code === upper && d.active);
+    const rule = discountsData.discounts.find((d) => d.code === upper && d.active);
 
     if (!rule) return { success: false, message: 'Invalid discount code' };
     if (this.#appliedCodes.has(upper)) return { success: false, message: 'Code already applied' };
@@ -180,9 +180,12 @@ class CartManager {
 
   save() {
     Storage.set('cart', {
-      items: Array.from(this.#items.entries()).map(([id, { quantity }]) => ({ productId: id, quantity })),
+      items: Array.from(this.#items.entries()).map(([id, { quantity }]) => ({
+        productId: id,
+        quantity,
+      })),
       codes: [...this.#appliedCodes],
-      lastUpdated: new Date().toISOString()
+      lastUpdated: new Date().toISOString(),
     });
   }
 
@@ -199,7 +202,7 @@ class CartManager {
     });
 
     if (saved.codes) {
-      saved.codes.forEach(code => this.#appliedCodes.add(code));
+      saved.codes.forEach((code) => this.#appliedCodes.add(code));
     }
 
     this.#emit();
@@ -210,7 +213,7 @@ class CartManager {
   onChange(callback) {
     this.#subscribers.push(callback);
     return () => {
-      this.#subscribers = this.#subscribers.filter(cb => cb !== callback);
+      this.#subscribers = this.#subscribers.filter((cb) => cb !== callback);
     };
   }
 
@@ -224,13 +227,17 @@ class CartManager {
       codeDiscount: this.getCodeDiscount(),
       totalDiscount: this.getTotalDiscount(),
       total: this.getTotal(),
-      codes: this.getAppliedCodes()
+      codes: this.getAppliedCodes(),
     };
 
     store.setState('cart', data);
 
-    this.#subscribers.forEach(cb => {
-      try { cb(data); } catch (e) { console.error('Cart subscriber error:', e); }
+    this.#subscribers.forEach((cb) => {
+      try {
+        cb(data);
+      } catch (e) {
+        console.error('Cart subscriber error:', e);
+      }
     });
   }
 }

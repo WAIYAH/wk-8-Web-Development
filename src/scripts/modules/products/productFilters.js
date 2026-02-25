@@ -24,9 +24,9 @@ const ProductFilters = {
   bindEvents() {
     // Category filter
     const categoryBtns = document.querySelectorAll('[data-filter-category]');
-    categoryBtns.forEach(btn => {
+    categoryBtns.forEach((btn) => {
       btn.addEventListener('click', (e) => {
-        categoryBtns.forEach(b => b.classList.remove('active', 'bg-harvest-green', 'text-white'));
+        categoryBtns.forEach((b) => b.classList.remove('active', 'bg-harvest-green', 'text-white'));
         e.currentTarget.classList.add('active', 'bg-harvest-green', 'text-white');
         const filters = store.getState('filters');
         store.setState('filters', { ...filters, category: e.currentTarget.dataset.filterCategory });
@@ -92,14 +92,16 @@ const ProductFilters = {
     }
 
     // Re-bind add-to-cart buttons
-    this._gridEl?.querySelectorAll('.add-to-cart-btn').forEach(btn => {
+    this._gridEl?.querySelectorAll('.add-to-cart-btn').forEach((btn) => {
       btn.addEventListener('click', (e) => {
         e.preventDefault();
         const productId = Number(btn.dataset.productId);
-        document.dispatchEvent(new CustomEvent('fhm:addToCart', { detail: { productId, quantity: 1 } }));
+        document.dispatchEvent(
+          new CustomEvent('fhm:addToCart', { detail: { productId, quantity: 1 } })
+        );
       });
     });
-  }
+  },
 };
 
 export default ProductFilters;

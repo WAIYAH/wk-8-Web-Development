@@ -50,15 +50,19 @@ function initNavigation() {
 
   // Scroll glassmorphism
   let ticking = false;
-  window.addEventListener('scroll', () => {
-    if (!ticking) {
-      requestAnimationFrame(() => {
-        nav.classList.toggle('scrolled', window.scrollY > 20);
-        ticking = false;
-      });
-      ticking = true;
-    }
-  }, { passive: true });
+  window.addEventListener(
+    'scroll',
+    () => {
+      if (!ticking) {
+        requestAnimationFrame(() => {
+          nav.classList.toggle('scrolled', window.scrollY > 20);
+          ticking = false;
+        });
+        ticking = true;
+      }
+    },
+    { passive: true }
+  );
 
   // Mobile hamburger
   const toggle = document.getElementById('mobileMenuToggle');
@@ -72,7 +76,7 @@ function initNavigation() {
 
   // Active link highlighting
   const page = Router.getPage();
-  document.querySelectorAll('.nav-link-custom').forEach(link => {
+  document.querySelectorAll('.nav-link-custom').forEach((link) => {
     const href = link.getAttribute('href') || '';
     if (
       (page === 'home' && (href.includes('index') || href === '/' || href === '')) ||
@@ -93,7 +97,7 @@ async function initHomePage() {
   const featuredGrid = document.getElementById('featuredProducts');
   if (featuredGrid) {
     const featured = ProductService.getFeatured(4);
-    featuredGrid.innerHTML = featured.map(p => renderProductCard(p)).join('');
+    featuredGrid.innerHTML = featured.map((p) => renderProductCard(p)).join('');
     bindAddToCart(featuredGrid);
   }
 
@@ -101,7 +105,7 @@ async function initHomePage() {
   const recoGrid = document.getElementById('recommendedProducts');
   if (recoGrid) {
     const recs = Recommender.getRecommendations(4);
-    recoGrid.innerHTML = recs.map(p => renderProductCard(p)).join('');
+    recoGrid.innerHTML = recs.map((p) => renderProductCard(p)).join('');
     bindAddToCart(recoGrid);
 
     const recoLabel = document.getElementById('recoLabel');
@@ -112,7 +116,7 @@ async function initHomePage() {
   const seasonalGrid = document.getElementById('seasonalProducts');
   if (seasonalGrid) {
     const seasonal = ProductService.getSeasonal().slice(0, 4);
-    seasonalGrid.innerHTML = seasonal.map(p => renderProductCard(p)).join('');
+    seasonalGrid.innerHTML = seasonal.map((p) => renderProductCard(p)).join('');
     bindAddToCart(seasonalGrid);
   }
 
@@ -133,7 +137,8 @@ async function initShopPage() {
 // --- Product Detail Page ---
 async function initProductPage() {
   const { default: ProductService } = await import('@scripts/modules/products/productService.js');
-  const { renderProductDetail, renderProductCard } = await import('@scripts/modules/products/productRenderer.js');
+  const { renderProductDetail, renderProductCard } =
+    await import('@scripts/modules/products/productRenderer.js');
   const { default: Recommender } = await import('@scripts/modules/personalization/recommender.js');
 
   const params = new URLSearchParams(window.location.search);
@@ -160,7 +165,7 @@ async function initProductPage() {
 
     // Quantity controls
     const qtyValue = detailContainer.querySelector('.qty-value');
-    detailContainer.querySelectorAll('.qty-btn').forEach(btn => {
+    detailContainer.querySelectorAll('.qty-btn').forEach((btn) => {
       btn.addEventListener('click', () => {
         let qty = parseInt(qtyValue.value, 10);
         if (btn.dataset.action === 'increase') qty = Math.min(qty + 1, 99);
@@ -173,9 +178,11 @@ async function initProductPage() {
     detailContainer.querySelector('.add-to-cart-btn')?.addEventListener('click', (e) => {
       e.preventDefault();
       const qty = parseInt(qtyValue.value, 10);
-      document.dispatchEvent(new CustomEvent('fhm:addToCart', {
-        detail: { productId: product.id, quantity: qty }
-      }));
+      document.dispatchEvent(
+        new CustomEvent('fhm:addToCart', {
+          detail: { productId: product.id, quantity: qty },
+        })
+      );
     });
   }
 
@@ -190,9 +197,9 @@ async function initProductPage() {
   const relatedGrid = document.getElementById('relatedProducts');
   if (relatedGrid) {
     const related = ProductService.getByCategory(product.category)
-      .filter(p => p.id !== product.id)
+      .filter((p) => p.id !== product.id)
       .slice(0, 4);
-    relatedGrid.innerHTML = related.map(p => renderProductCard(p)).join('');
+    relatedGrid.innerHTML = related.map((p) => renderProductCard(p)).join('');
     bindAddToCart(relatedGrid);
   }
 
@@ -219,17 +226,19 @@ function initContactPage() {
       name: form.querySelector('#contactName').value,
       email: form.querySelector('#contactEmail').value,
       subject: form.querySelector('#contactSubject').value,
-      message: form.querySelector('#contactMessage').value
+      message: form.querySelector('#contactMessage').value,
     };
 
     const { valid, errors } = validateContactForm(fields);
 
     // Clear previous errors
-    form.querySelectorAll('.field-error').forEach(el => el.remove());
+    form.querySelectorAll('.field-error').forEach((el) => el.remove());
 
     if (!valid) {
       Object.entries(errors).forEach(([field, msg]) => {
-        const input = form.querySelector(`#contact${field.charAt(0).toUpperCase() + field.slice(1)}`);
+        const input = form.querySelector(
+          `#contact${field.charAt(0).toUpperCase() + field.slice(1)}`
+        );
         if (input) {
           const err = document.createElement('p');
           err.className = 'field-error text-tomato-red text-xs mt-1';
@@ -241,7 +250,7 @@ function initContactPage() {
       return;
     }
 
-    showToast('Message sent successfully! We\'ll get back to you soon.', 'success');
+    showToast("Message sent successfully! We'll get back to you soon.", 'success');
     form.reset();
   });
 }
@@ -269,13 +278,15 @@ function initNewsletter() {
 
 // --- Helper: Bind add-to-cart buttons within a container ---
 function bindAddToCart(container) {
-  container.querySelectorAll('.add-to-cart-btn').forEach(btn => {
+  container.querySelectorAll('.add-to-cart-btn').forEach((btn) => {
     btn.addEventListener('click', (e) => {
       e.preventDefault();
       const productId = Number(btn.dataset.productId);
-      document.dispatchEvent(new CustomEvent('fhm:addToCart', {
-        detail: { productId, quantity: 1, triggerEl: btn }
-      }));
+      document.dispatchEvent(
+        new CustomEvent('fhm:addToCart', {
+          detail: { productId, quantity: 1, triggerEl: btn },
+        })
+      );
     });
   });
 }

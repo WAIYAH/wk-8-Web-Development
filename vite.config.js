@@ -1,9 +1,10 @@
 import { defineConfig } from 'vite';
 import tailwindcss from '@tailwindcss/vite';
+import copyStaticAssets from './vite.copy-static-assets.js';
 import { resolve } from 'path';
 
 export default defineConfig({
-  plugins: [tailwindcss()],
+  plugins: [tailwindcss(), copyStaticAssets()],
   root: '.',
   publicDir: 'public',
   build: {
@@ -19,7 +20,7 @@ export default defineConfig({
         contact: resolve(__dirname, 'contact.html'),
         privacy: resolve(__dirname, 'privacy.html'),
         terms: resolve(__dirname, 'terms.html'),
-        '404': resolve(__dirname, '404.html'),
+        404: resolve(__dirname, '404.html'),
       },
       output: {
         entryFileNames: '[name].js',
@@ -40,6 +41,6 @@ export default defineConfig({
   },
   server: {
     port: 3000,
-    open: '/pages/index.html',
+    open: '/index.html',
   },
 });

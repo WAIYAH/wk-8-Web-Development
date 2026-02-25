@@ -1,14 +1,14 @@
 {
-	"version": "2.0.0",
-	"tasks": [
-		{
-			"label": "Test HTML output",
-			"type": "shell",
-			"command": "npx serve dist",
-			"args": [],
-			"isBackground": false,
-			"problemMatcher": [],
-			"group": "test"
-		}
-	]
+  "version": "2.0.0",
+  "tasks": [
+    {
+      "label": "Test HTML output",
+      "type": "shell",
+      "command": "npx serve dist",
+      "args": [],
+      "isBackground": false,
+      "problemMatcher": [],
+      "group": "test"
+    }
+  ]
 }

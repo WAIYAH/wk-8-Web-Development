@@ -16,7 +16,7 @@ const Tracker = {
       searchHistory: [],
       categoryAffinity: {},
       cartHistory: [],
-      lastVisit: null
+      lastVisit: null,
     };
     this._profile.lastVisit = new Date().toISOString();
     this.save();
@@ -28,7 +28,7 @@ const Tracker = {
       productId: product.id,
       category: product.category,
       price: product.price,
-      timestamp: new Date().toISOString()
+      timestamp: new Date().toISOString(),
     });
 
     // Trim history
@@ -48,7 +48,7 @@ const Tracker = {
     this._profile.searchHistory.unshift({
       query: query.trim(),
       resultsCount,
-      timestamp: new Date().toISOString()
+      timestamp: new Date().toISOString(),
     });
 
     if (this._profile.searchHistory.length > 20) {
@@ -63,7 +63,7 @@ const Tracker = {
       productId,
       action,
       quantity,
-      timestamp: new Date().toISOString()
+      timestamp: new Date().toISOString(),
     });
 
     if (this._profile.cartHistory.length > MAX_HISTORY) {
@@ -88,13 +88,13 @@ const Tracker = {
   getRecentlyViewed(count = 4) {
     const seen = new Set();
     return this._profile.viewHistory
-      .filter(v => {
+      .filter((v) => {
         if (seen.has(v.productId)) return false;
         seen.add(v.productId);
         return true;
       })
       .slice(0, count)
-      .map(v => v.productId);
+      .map((v) => v.productId);
   },
 
   getTopCategories(count = 3) {
@@ -118,14 +118,14 @@ const Tracker = {
       searchHistory: [],
       categoryAffinity: {},
       cartHistory: [],
-      lastVisit: null
+      lastVisit: null,
     };
     this.save();
   },
 
   save() {
     Storage.set('user_profile', this._profile);
-  }
+  },
 };
 
 export default Tracker;

@@ -1,13 +1,45 @@
 {
   "discounts": [
-    { "code": "WELCOME15", "type": "percentage", "value": 0.15, "description": "15% off your first purchase", "minOrder": 0, "maxUses": 1, "active": true },
-    { "code": "FRESH10", "type": "percentage", "value": 0.10, "description": "10% off orders over $20", "minOrder": 20, "maxUses": null, "active": true },
-    { "code": "HARVEST5", "type": "fixed", "value": 5.00, "description": "$5 off orders over $30", "minOrder": 30, "maxUses": null, "active": true },
-    { "code": "REORDER20", "type": "percentage", "value": 0.20, "description": "20% off reorder of previous items", "minOrder": 0, "maxUses": null, "active": true }
+    {
+      "code": "WELCOME15",
+      "type": "percentage",
+      "value": 0.15,
+      "description": "15% off your first purchase",
+      "minOrder": 0,
+      "maxUses": 1,
+      "active": true
+    },
+    {
+      "code": "FRESH10",
+      "type": "percentage",
+      "value": 0.1,
+      "description": "10% off orders over $20",
+      "minOrder": 20,
+      "maxUses": null,
+      "active": true
+    },
+    {
+      "code": "HARVEST5",
+      "type": "fixed",
+      "value": 5.0,
+      "description": "$5 off orders over $30",
+      "minOrder": 30,
+      "maxUses": null,
+      "active": true
+    },
+    {
+      "code": "REORDER20",
+      "type": "percentage",
+      "value": 0.2,
+      "description": "20% off reorder of previous items",
+      "minOrder": 0,
+      "maxUses": null,
+      "active": true
+    }
   ],
   "volumeDiscounts": [
     { "minQty": 3, "discount": 0.05, "label": "Buy 3+, save 5%" },
-    { "minQty": 5, "discount": 0.10, "label": "Buy 5+, save 10%" },
+    { "minQty": 5, "discount": 0.1, "label": "Buy 5+, save 10%" },
     { "minQty": 10, "discount": 0.15, "label": "Buy 10+, save 15%" }
   ]
 }

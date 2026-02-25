@@ -31,14 +31,11 @@ const Recommender = {
    */
   getFrequencyRecommendations(count = 4) {
     const recentIds = Tracker.getRecentlyViewed(count * 2);
-    const products = recentIds
-      .map(id => ProductService.getById(id))
-      .filter(Boolean);
+    const products = recentIds.map((id) => ProductService.getById(id)).filter(Boolean);
 
     // Pad with featured if not enough
     if (products.length < count) {
-      const featured = ProductService.getFeatured(count)
-        .filter(p => !recentIds.includes(p.id));
+      const featured = ProductService.getFeatured(count).filter((p) => !recentIds.includes(p.id));
       products.push(...featured);
     }
 
@@ -54,9 +51,9 @@ const Recommender = {
 
     // Get products from preferred categories, excluding recently viewed
     let products = [];
-    topCategories.forEach(cat => {
+    topCategories.forEach((cat) => {
       const catProducts = ProductService.getByCategory(cat)
-        .filter(p => !recentIds.has(p.id))
+        .filter((p) => !recentIds.has(p.id))
         .sort((a, b) => b.rating - a.rating);
       products.push(...catProducts);
     });
@@ -64,7 +61,7 @@ const Recommender = {
     // Pad with cross-category (discover new things)
     if (products.length < count) {
       const all = ProductService.getAll()
-        .filter(p => !recentIds.has(p.id) && !products.find(r => r.id === p.id))
+        .filter((p) => !recentIds.has(p.id) && !products.find((r) => r.id === p.id))
         .sort((a, b) => b.rating - a.rating);
       products.push(...all);
     }
@@ -80,16 +77,13 @@ const Recommender = {
     const recentIds = new Set(Tracker.getRecentlyViewed(10));
 
     // Calculate average price from view history
-    const viewedPrices = profile.viewHistory
-      .map(v => v.price)
-      .filter(Boolean);
-    const avgPrice = viewedPrices.length > 0
-      ? viewedPrices.reduce((a, b) => a + b, 0) / viewedPrices.length
-      : 3;
+    const viewedPrices = profile.viewHistory.map((v) => v.price).filter(Boolean);
+    const avgPrice =
+      viewedPrices.length > 0 ? viewedPrices.reduce((a, b) => a + b, 0) / viewedPrices.length : 3;
 
     // Score each product
-    const all = ProductService.getAll().filter(p => !recentIds.has(p.id));
-    const scored = all.map(product => {
+    const all = ProductService.getAll().filter((p) => !recentIds.has(p.id));
+    const scored = all.map((product) => {
       let score = 0;
 
       // Category affinity score
@@ -109,7 +103,7 @@ const Recommender = {
       }
 
       // Bonus for organic (if user views organic frequently)
-      const organicViews = profile.viewHistory.filter(v => {
+      const organicViews = profile.viewHistory.filter((v) => {
         const p = ProductService.getById(v.productId);
         return p && p.organic;
       }).length;
@@ -119,7 +113,7 @@ const Recommender = {
     });
 
     scored.sort((a, b) => b.score - a.score);
-    return scored.slice(0, count).map(s => s.product);
+    return scored.slice(0, count).map((s) => s.product);
   },
 
   /**
@@ -127,7 +121,7 @@ const Recommender = {
    */
   getRecentlyViewed(count = 4) {
     const ids = Tracker.getRecentlyViewed(count);
-    return ids.map(id => ProductService.getById(id)).filter(Boolean);
+    return ids.map((id) => ProductService.getById(id)).filter(Boolean);
   },
 
   /**
@@ -139,7 +133,7 @@ const Recommender = {
     if (interactions >= 10) return 'Based on Your Preferences';
     if (interactions >= 3) return 'Recently Popular';
     return 'Top Picks';
-  }
+  },
 };
 
 export default Recommender;

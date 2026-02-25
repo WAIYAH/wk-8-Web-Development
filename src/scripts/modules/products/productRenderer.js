@@ -51,7 +51,7 @@ export function renderProductGrid(products) {
       </div>
     `;
   }
-  return products.map(p => renderProductCard(p)).join('');
+  return products.map((p) => renderProductCard(p)).join('');
 }
 
 export function renderProductDetail(product) {
@@ -108,12 +108,16 @@ export function renderProductDetail(product) {
         <div class="bg-farm-white rounded-xl p-5 border border-sprout-green/20">
           <h3 class="text-sm font-bold text-dark mb-3 uppercase tracking-wider">Nutrition Per Serving</h3>
           <div class="grid grid-cols-2 sm:grid-cols-4 gap-3">
-            ${Object.entries(product.nutrition).map(([key, val]) => `
+            ${Object.entries(product.nutrition)
+              .map(
+                ([key, val]) => `
               <div class="text-center">
                 <div class="text-lg font-bold text-harvest-green">${val}</div>
                 <div class="text-xs text-stone-gray capitalize">${key.replace(/([A-Z])/g, ' $1').trim()}</div>
               </div>
-            `).join('')}
+            `
+              )
+              .join('')}
           </div>
         </div>
       </div>
