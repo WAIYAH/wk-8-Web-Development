@@ -1,0 +1,21 @@
+{
+  "name": "Fresh Harvest Market",
+  "short_name": "Harvest",
+  "start_url": "/index.html",
+  "display": "standalone",
+  "background_color": "#ffffff",
+  "theme_color": "#4CAF50",
+  "description": "Farm-fresh organic fruits and vegetables delivered to your door.",
+  "icons": [
+    {
+      "src": "/assets/images/brand/favicon-192.png",
+      "sizes": "192x192",
+      "type": "image/png"
+    },
+    {
+      "src": "/assets/images/brand/favicon-512.png",
+      "sizes": "512x512",
+      "type": "image/png"
+    }
+  ]
+}

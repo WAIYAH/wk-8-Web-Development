@@ -1,0 +1,10 @@
+/* TEAM */
+Team: Fresh Harvest Market
+Site: https://freshharvestmarket.com
+Contact: hello@freshharvestmarket.com
+
+/* THANKS */
+Thanks to all contributors, local farmers, and our community for supporting sustainable agriculture.
+
+/* SITE */
+Last update: 2026-02-25
